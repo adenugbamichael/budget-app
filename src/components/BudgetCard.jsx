@@ -7,6 +7,7 @@ export default function BudgetCard({
   amount,
   max,
   gray,
+  hideButtons,
   onAddExpenseClick,
 }) {
   const classNames = []
@@ -38,16 +39,18 @@ export default function BudgetCard({
             now={amount}
           />
         )}
-        <Stack direction='horizontal' gap='2' className='mt-4'>
-          <Button
-            onClick={onAddExpenseClick}
-            variant='outline-primary'
-            className='ms-auto'
-          >
-            Add Expense
-          </Button>
-          <Button variant='outline-secondary'>View Expense</Button>
-        </Stack>
+        {!hideButtons && (
+          <Stack direction='horizontal' gap='2' className='mt-4'>
+            <Button
+              onClick={onAddExpenseClick}
+              variant='outline-primary'
+              className='ms-auto'
+            >
+              Add Expense
+            </Button>
+            <Button variant='outline-secondary'>View Expense</Button>
+          </Stack>
+        )}
       </Card.Body>
     </Card>
   )
