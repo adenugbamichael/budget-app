@@ -4,6 +4,7 @@ import { Container, Stack, Button } from "react-bootstrap"
 import BudgetCard from "./components/BudgetCard"
 import AddBudgetModal from "./components/AddBudgetModal"
 import AddExpenseModal from "./components/AddExpenseModal"
+import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard"
 
 const App = () => {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
@@ -53,6 +54,7 @@ const App = () => {
               />
             )
           })}
+          <UncategorizedBudgetCard />
         </div>
       </Container>
       <AddBudgetModal
