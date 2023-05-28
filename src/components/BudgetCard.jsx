@@ -1,13 +1,19 @@
 /* eslint-disable react/prop-types */
-import { Button, Card, ProgressBar, Stack } from "react-bootstrap";
-import { currencyFormatter } from "./utils";
+import { Button, Card, ProgressBar, Stack } from "react-bootstrap"
+import { currencyFormatter } from "../utils"
 
-export default function BudgetCard({ name, amount, max, gray }) {
-  const classNames = [];
+export default function BudgetCard({
+  name,
+  amount,
+  max,
+  gray,
+  onAddExpenseClick,
+}) {
+  const classNames = []
   if (amount > max) {
-    classNames.push("bg-danger", "bg-opacity-10");
+    classNames.push("bg-danger", "bg-opacity-10")
   } else if (gray) {
-    classNames.push("bg-light");
+    classNames.push("bg-light")
   }
   return (
     <Card className={classNames.join(" ")}>
@@ -15,10 +21,12 @@ export default function BudgetCard({ name, amount, max, gray }) {
         <Card.Title className='d-flex justify-content-between align-items-baseline fw-normal mb-3'>
           <div className='me-2'>{name}</div>
           <div className='d-flex align-items-baseline'>
-            {currencyFormatter.format(amount)}{" "}
-            <span className='text-muted fs-6 ms-1'>
-              / {currencyFormatter.format(max)}
-            </span>
+            {currencyFormatter.format(amount)}
+            {max && (
+              <span className='text-muted fs-6 ms-1'>
+                / {currencyFormatter.format(max)}
+              </span>
+            )}
           </div>
         </Card.Title>
         <ProgressBar
@@ -29,19 +37,23 @@ export default function BudgetCard({ name, amount, max, gray }) {
           now={amount}
         />
         <Stack direction='horizontal' gap='2' className='mt-4'>
-          <Button variant='outline-primary' className='ms-auto'>
+          <Button
+            onClick={onAddExpenseClick}
+            variant='outline-primary'
+            className='ms-auto'
+          >
             Add Expense
           </Button>
           <Button variant='outline-secondary'>View Expense</Button>
         </Stack>
       </Card.Body>
     </Card>
-  );
+  )
 }
 
 function getProgressBarVariant(amount, max) {
-  const ratio = amount / max;
-  if (ratio < 0.5) return "primary";
-  if (ratio < 0.75) return "warning";
-  return "danger";
+  const ratio = amount / max
+  if (ratio < 0.5) return "primary"
+  if (ratio < 0.75) return "warning"
+  return "danger"
 }
